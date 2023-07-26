@@ -1,0 +1,5 @@
+# For Git GPG key
+export GPG_TTY=$(tty)
+
+# For AutoXrandr
+export PATH=$PATH:$HOME/.local/bin

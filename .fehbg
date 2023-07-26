@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill '/home/tts/Pictures/wallpapers/space.jpg' 
