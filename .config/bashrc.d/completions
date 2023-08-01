@@ -9,3 +9,6 @@ function _dotnet_bash_complete()
     read -d '' -ra COMPREPLY < <(compgen -W "${candidates[*]:-}" -- "$cur")
 }
 complete -f -F _dotnet_bash_complete dotnet
+
+# ASDF
+. /opt/asdf-vm/asdf.sh

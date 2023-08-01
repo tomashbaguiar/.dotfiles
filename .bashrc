@@ -3,7 +3,7 @@
 #
 
 # Environment Variables
-[[ -f $HOME/.config/.env ]] && export $(envsubst < $HOME/.env)
+[[ -f $HOME/.env ]] && export $(envsubst < $HOME/.env)
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -14,5 +14,6 @@ PS1='[\u@\h \W]\$ '
 BASH_CONFIG_DIR=$XDG_CONFIG_HOME/bashrc.d/
 BASH_CONFIGS=$(ls $BASH_CONFIG_DIR)
 for CONFIG in $BASH_CONFIGS; do
-    [[ -f $BASH_CONFIG_DIR/$CONFIG ]] && . $BASH_CONFIG_DIR/$CONFIG
+    CONFIG_DIR_OR_FILE=$BASH_CONFIG_DIR/$CONFIG
+    [[ -f $CONFIG_DIR_OR_FILE ]] && . $CONFIG_DIR_OR_FILE
 done

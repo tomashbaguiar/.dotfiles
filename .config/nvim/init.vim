@@ -1,1 +1,1 @@
-/home/tts/.vimrc
+/home/tts/.vim/vimrc

@@ -1,0 +1,116 @@
+"
+" .vimrc
+"
+
+" DEFAULTS --------------------------------------------------------------- {{{
+" Not compatible with Vi
+if &cp | set nocp | endif
+let s:cpo_save=&cpo
+set cpo&vim
+inoremap <C-U> u
+inoremap  u
+let &cpo=s:cpo_save
+unlet s:cpo_save
+set backspace=indent,eol,start
+set display=truncate
+set fileencodings=ucs-bom,utf-8,default,latin1
+set helplang=en
+set history=200
+set nrformats=bin,hex
+"set ruler
+set showcmd
+set ttimeout
+set ttimeoutlen=100
+"set wildmenu
+" vim: set ft=vim :
+set showmode
+
+" }}}
+
+" OPTIONS --------------------------------------------------------------- {{{
+"" Numbering
+set number relativenumber
+
+"" Center the cursor
+set scrolloff=999
+
+"" Status Line
+set laststatus=2
+""" Default status line plus %L (file line number)
+"set statusline=%f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P\ %L
+""" Custom status line
+set statusline=\ %F\ [\%L\]\ %H\ %M\ %Y\ %R%=\ row:\ %l\ col:\ %c\ percent:\ %p%%%=\ ascii:\ %b\ hex:\ 0x%B
+set ruler
+
+"" Menu
+set wildmenu
+set wildmode=list:longest
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+"" Text Width
+set textwidth=78
+set wrap
+
+"" Highlighting
+set hlsearch incsearch
+
+"" True Color Support
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+    let &t_8f = "\<esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<esc>[48;2;%lu;%lu;%lum"
+endif
+
+syntax on
+set termguicolors
+colorscheme slate
+"" No background (transparency)
+hi Normal guibg=NONE ctermbg=NONE
+
+"" Indenting
+filetype plugin indent on
+set expandtab smarttab
+set shiftwidth=4
+set tabstop=4 softtabstop=0
+
+"" Clipboard
+set clipboard+=unnamedplus
+
+"" Mouse
+set mouse=
+
+"" Split
+set splitright
+set splitbelow
+
+" }}}
+
+" REMAPS ---------------------------------------------------------------- {{{
+"" Leader
+let mapleader = " "
+
+"" Explorer
+nmap <silent> <leader>pv :Ex<cr>
+
+"" Pane Splitting
+nmap <silent> <leader>\| :vsplit<cr>
+nmap <silent> <leader>- :split<cr>
+
+"" Navigation
+nmap <silent> <leader>h :wincmd h<cr>
+nmap <silent> <leader>j :wincmd j<cr>
+nmap <silent> <leader>k :wincmd k<cr>
+nmap <silent> <leader>l :wincmd l<cr>
+
+" }}}
+
+" AUTOCOMMANDS ----------------------------------------------------------- {{{
+"" Folding
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+"" Clipboard persistency
+autocmd VimLeave * call system("echo -n $'" . escape(getreg(), "'") . "' | xsel --input --clipboard")
+
+" }}}
