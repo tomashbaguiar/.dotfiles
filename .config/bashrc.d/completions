@@ -11,4 +11,4 @@ function _dotnet_bash_complete()
 complete -f -F _dotnet_bash_complete dotnet
 
 # ASDF
-. /opt/asdf-vm/asdf.sh
+[[ -f /opt/asdf-vm/asdf.sh ]] && . /opt/asdf-vm/asdf.sh
